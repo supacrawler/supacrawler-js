@@ -1,0 +1,45 @@
+{
+  "name": "@supacrawler/js",
+  "version": "0.1.0",
+  "description": "Typed TypeScript/JavaScript SDK for Supacrawler API (scrape, jobs, screenshots, watch)",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": ["scrape", "crawler", "screenshots", "watch", "sdk", "supacrawler"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Supacrawler/supacrawler-js.git",
+    "directory": "sdk/supacrawler-js"
+  },
+  "homepage": "https://supacrawler.com",
+  "bugs": {
+    "url": "https://github.com/Supacrawler/supacrawler-js/issues"
+  },
+  "author": "Supacrawler",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": { "access": "public" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build",
+    "example:scrape": "npm run build && node dist/examples/scrape.js",
+    "example:jobs": "npm run build && node dist/examples/jobs.js",
+    "example:screenshots": "npm run build && node dist/examples/screenshots.js",
+    "example:watch": "npm run build && node dist/examples/watch.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.0"
+  },
+  "license": "MIT"
+}
