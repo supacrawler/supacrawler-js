@@ -25,6 +25,9 @@ async function main() {
   console.log('Screenshot status:', status.status)
   if (status.status === 'completed' && status.data && 'screenshot' in status.data) {
     console.log('Screenshot URL:', (status.data as any).screenshot)
+    // Example: Renew signed URL
+    const renewed = await client.getScreenshot(job.job_id)
+    console.log('Renewed screenshot URL:', renewed.screenshot)
   }
 }
 

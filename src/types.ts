@@ -143,6 +143,14 @@ export interface ScreenshotCreateResponse {
   metadata?: ScreenshotMetadata
 }
 
+export interface ScreenshotGetResponse {
+  success: boolean
+  job_id: string
+  url: string
+  screenshot: string
+  metadata?: ScreenshotMetadata
+}
+
 export type Frequency = 'hourly' | 'daily' | 'weekly' | 'monthly' | 'custom'
 
 export interface WatchCreateRequest {

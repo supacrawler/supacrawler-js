@@ -6,6 +6,7 @@ import type {
   JobStatusResponse,
   ScreenshotRequest,
   ScreenshotCreateResponse,
+  ScreenshotGetResponse,
   WatchCreateRequest,
   WatchCreateResponse,
   WatchGetResponse,
@@ -39,7 +40,9 @@ export class SupacrawlerClient {
 
   constructor(options: ClientOptions) {
     this.apiKey = options.apiKey
-    this.baseUrl = (options.baseUrl ?? 'https://api.supacrawler.com/api/v1').replace(/\/$/, '')
+    // Allow passing engine root (e.g., http://localhost:8081/v1) or hosted API root
+    const defaultBase = 'https://api.supacrawler.com/api/v1'
+    this.baseUrl = (options.baseUrl ?? defaultBase).replace(/\/$/, '')
     this.fetchFn = options.fetchFn ?? fetch
     this.timeoutMs = options.timeoutMs ?? 30000
   }
@@ -116,6 +119,19 @@ export class SupacrawlerClient {
       headers: this.headers(),
       body: JSON.stringify(req),
     })
+  }
+
+  async getScreenshot(jobId: string): Promise<ScreenshotGetResponse> {
+    const qs = new URLSearchParams({ job_id: jobId })
+    return this.request<ScreenshotGetResponse>(`/screenshots?${qs.toString()}`, {
+      headers: { Authorization: `Bearer ${this.apiKey}` },
+    })
+  }
+
+  async waitForScreenshot(jobId: string, opts: { intervalMs?: number; timeoutMs?: number } = {}): Promise<ScreenshotGetResponse> {
+    const status = await this.waitForJob(jobId, opts)
+    if (status.status !== 'completed') throw new SupacrawlerError(`Job ${jobId} did not complete`)
+    return this.getScreenshot(jobId)
   }
 
   // ------------- Watch -------------

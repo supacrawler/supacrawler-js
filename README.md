@@ -49,6 +49,10 @@ const status = await client.waitForJob(job.job_id)
 // Screenshot job
 const sJob = await client.createScreenshotJob({ url: 'https://example.com', device: 'desktop', full_page: true })
 
+// Wait and fetch a fresh signed URL (recommended)
+const signed = await client.waitForScreenshot(sJob.job_id)
+console.log('screenshot:', signed.screenshot)
+
 // Watch create/pause/resume/check/delete
 const watch = await client.watchCreate({ url: 'https://example.com/pricing', frequency: 'daily', notify_email: 'you@example.com' })
 await client.watchPause(watch.watch_id)
