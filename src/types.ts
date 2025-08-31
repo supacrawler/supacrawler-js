@@ -157,6 +157,7 @@ export interface WatchCreateRequest {
   url: string
   frequency: Frequency
   notify_email?: string
+  notification_preference?: 'changes_only' | 'all_runs'
   selector?: string
   include_html?: boolean
   include_image?: boolean
@@ -173,6 +174,7 @@ export interface Watch {
   url?: string
   frequency?: string
   notify_email?: string
+  notification_preference?: 'changes_only' | 'all_runs'
   include_html?: boolean
   include_image?: boolean
   full_page?: boolean

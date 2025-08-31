@@ -1,0 +1,85 @@
+# Pre-commit hooks for Supacrawler TypeScript SDK
+# See https://pre-commit.com for more information
+
+repos:
+# Basic file checks
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.6.0
+  hooks:
+  - id: check-yaml
+    files: \.(yaml|yml)$
+  - id: check-json
+    files: \.json$
+  - id: check-toml
+    files: \.toml$
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+  - id: check-merge-conflict
+
+# TypeScript/JavaScript formatting and linting
+- repo: https://github.com/pre-commit/mirrors-prettier
+  rev: v4.0.0-alpha.8
+  hooks:
+  - id: prettier
+    types_or: [javascript, jsx, typescript, tsx, json, yaml, markdown]
+
+# TypeScript compilation check
+- repo: local
+  hooks:
+  - id: typescript-check
+    name: TypeScript Compilation Check
+    entry: bun run build
+    language: system
+    files: ^src/.*\.ts$
+    pass_filenames: false
+    description: Ensure TypeScript compiles without errors
+
+# Supacrawler comprehensive package tests
+- repo: local
+  hooks:
+  - id: supacrawler-package-tests
+    name: Supacrawler Package Tests
+    entry: bash -c "npm pack && cd test && bun install ../supacrawler-js-*.tgz && bun run all_package_tests.ts"
+    language: system
+    files: ^(src/|test/).*\.(ts|js)$
+    pass_filenames: false
+    description: Run comprehensive package tests for all Supacrawler endpoints
+
+# Individual test suites (optional, can be enabled for specific testing)
+- repo: local
+  hooks:
+  - id: supacrawler-screenshot-tests
+    name: Supacrawler Screenshot Package Tests
+    entry: bash -c "npm pack && cd test && bun install ../supacrawler-js-*.tgz && bun run screenshot_package_test.ts"
+    language: system
+    files: ^(src/|test/screenshot_package_test\.ts).*\.(ts|js)$
+    pass_filenames: false
+    stages: [manual]  # Only run manually with --hook-stage manual
+
+  - id: supacrawler-scrape-tests
+    name: Supacrawler Scrape Package Tests
+    entry: bash -c "npm pack && cd test && bun install ../supacrawler-js-*.tgz && bun run scrape_package_test.ts"
+    language: system
+    files: ^(src/|test/scrape_package_test\.ts).*\.(ts|js)$
+    pass_filenames: false
+    stages: [manual]
+
+  - id: supacrawler-crawl-tests
+    name: Supacrawler Crawl Package Tests
+    entry: bash -c "npm pack && cd test && bun install ../supacrawler-js-*.tgz && bun run crawl_package_test.ts"
+    language: system
+    files: ^(src/|test/crawl_package_test\.ts).*\.(ts|js)$
+    pass_filenames: false
+    stages: [manual]
+
+# Examples validation
+- repo: local
+  hooks:
+  - id: examples-check
+    name: Examples Validation
+    entry: bash -c "npm pack && cd examples && bun install ../supacrawler-js-*.tgz && echo 'Examples package installation successful'"
+    language: system
+    files: ^examples/.*\.(ts|js)$
+    pass_filenames: false
+    stages: [manual]
+    description: Validate that examples can import the package correctly

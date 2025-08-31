@@ -1,0 +1,15 @@
+{
+  "name": "supacrawler-js-examples",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Examples for @supacrawler/js package",
+  "scripts": {
+    "screenshots": "node screenshots.js",
+    "scrape": "node scrape.js",
+    "jobs": "node jobs.js",
+    "watch": "node watch.js"
+  },
+  "dependencies": {
+    "@supacrawler/js": "file:../supacrawler-js-0.1.1.tgz"
+  }
+}

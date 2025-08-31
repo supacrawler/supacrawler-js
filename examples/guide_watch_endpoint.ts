@@ -1,4 +1,4 @@
-import { SupacrawlerClient } from '../index'
+import { SupacrawlerClient } from '@supacrawler/js'
 
 async function main() {
   const client = new SupacrawlerClient({ apiKey: process.env.SUPACRAWLER_API_KEY || 'YOUR_API_KEY' })
@@ -8,6 +8,7 @@ async function main() {
     url: 'https://example.com/pricing',
     frequency: 'daily',
     notify_email: 'alerts@yourcompany.com',
+    notification_preference: 'changes_only',
     selector: '#pricing-table',
     include_html: true,
     include_image: true,

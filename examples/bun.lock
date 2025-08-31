@@ -1,0 +1,14 @@
+{
+  "lockfileVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "supacrawler-js-examples",
+      "dependencies": {
+        "@supacrawler/js": "file:../supacrawler-js-0.1.1.tgz",
+      },
+    },
+  },
+  "packages": {
+    "@supacrawler/js": ["@supacrawler/js@../supacrawler-js-0.1.1.tgz", {}],
+  }
+}

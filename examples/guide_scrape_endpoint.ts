@@ -1,4 +1,4 @@
-import { SupacrawlerClient } from '../index'
+import { SupacrawlerClient, ScrapeResponse } from '@supacrawler/js'
 
 async function main() {
   const client = new SupacrawlerClient({ apiKey: process.env.SUPACRAWLER_API_KEY || 'YOUR_API_KEY' })
@@ -8,7 +8,8 @@ async function main() {
   console.log('Basic scrape:', basic)
 
   // HTML scrape with JS rendering and wait
-  const html = await client.scrape({ url: 'https://spa-example.com', format: 'html', render_js: true, wait: 3000, device: 'desktop' })
+  // Note: Engine scrape does not accept 'wait' or 'device'. Keep to OpenAPI fields only.
+  const html = await client.scrape({ url: 'https://spa-example.com', format: 'markdown', render_js: true, include_html: true })
   console.log('HTML scrape with JS:', !!(html as any))
 
   // Links mapping with depth and max_links

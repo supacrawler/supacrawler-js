@@ -6,13 +6,13 @@ Typed TypeScript/JavaScript SDK for Supacrawler API.
 
 - From npm:
 ```bash
-npm install supacrawler-js
+npm install @supacrawler/js
 # or
-yarn add supacrawler-js
+yarn add @supacrawler/js
 # or
-pnpm add supacrawler-js
+pnpm add @supacrawler/js
 # or
-bun add supacrawler-js
+bun add @supacrawler/js
 ```
 
 - From GitHub (direct):
@@ -29,7 +29,7 @@ npm run build
 ## Usage
 
 ```ts
-import { SupacrawlerClient } from 'supacrawler-js'
+import { SupacrawlerClient } from '@supacrawler/js'
 
 const client = new SupacrawlerClient({ apiKey: process.env.SUPACRAWLER_API_KEY! })
 
@@ -54,7 +54,12 @@ const signed = await client.waitForScreenshot(sJob.job_id)
 console.log('screenshot:', signed.screenshot)
 
 // Watch create/pause/resume/check/delete
-const watch = await client.watchCreate({ url: 'https://example.com/pricing', frequency: 'daily', notify_email: 'you@example.com' })
+const watch = await client.watchCreate({
+  url: 'https://example.com/pricing',
+  frequency: 'daily',
+  notify_email: 'you@example.com',
+  notification_preference: 'changes_only', // or 'all_runs'
+})
 await client.watchPause(watch.watch_id)
 await client.watchResume(watch.watch_id)
 await client.watchCheck(watch.watch_id)
@@ -63,10 +68,46 @@ await client.watchDelete(watch.watch_id)
 
 ## API coverage
 - GET `/v1/scrape` (all params)
-- POST `/v1/jobs`, GET `/v1/jobs/{id}`
+- POST `/v1/crawl`, GET `/v1/crawl/{id}`
 - POST `/v1/screenshots`
 - POST `/v1/watch`, GET `/v1/watch`, GET `/v1/watch/{id}`, DELETE `/v1/watch/{id}`, PATCH `/v1/watch/{id}/pause`, PATCH `/v1/watch/{id}/resume`, POST `/v1/watch/{id}/check`
 
 ## Development
-- Env var: `SUPACRAWLER_API_KEY`.
-- Example runners: `npm run example:scrape|jobs|screenshots|watch`.
+
+### Environment Variables
+- `SUPACRAWLER_API_KEY` - Your API key for production usage
+- `SUPACRAWLER_BASE_URL` - Base URL (defaults to production API)
+
+### Local Testing
+See [TESTING.md](./TESTING.md) for comprehensive testing guide including:
+- Package-based testing with real imports
+- Local development setup
+- Running individual test suites
+- Examples verification
+
+### Quick Test
+```bash
+# Build and test the package locally
+bun run build && npm pack
+cd test && bun install ../supacrawler-js-*.tgz
+bun run all_package_tests.ts
+```
+
+### Examples
+```bash
+# Run examples (after building and installing package)
+cd examples && bun install
+node screenshots.js  # Screenshot examples
+node scrape.js       # Scrape examples  
+node jobs.js         # Crawl examples
+node watch.js        # Watch examples
+```
+
+### Pre-commit Hooks
+Install pre-commit hooks to ensure code quality:
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+This will run TypeScript compilation checks and comprehensive package tests before each commit.

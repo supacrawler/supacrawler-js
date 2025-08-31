@@ -1,6 +1,6 @@
 {
   "name": "@supacrawler/js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Typed TypeScript/JavaScript SDK for Supacrawler API (scrape, jobs, screenshots, watch)",
   "type": "module",
   "main": "dist/index.js",
@@ -32,10 +32,10 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "prepublishOnly": "npm run build",
-    "example:scrape": "npm run build && node dist/examples/scrape.js",
-    "example:jobs": "npm run build && node dist/examples/jobs.js",
-    "example:screenshots": "npm run build && node dist/examples/screenshots.js",
-    "example:watch": "npm run build && node dist/examples/watch.js"
+    "example:scrape": "npm run build && cd examples && node scrape.js",
+    "example:jobs": "npm run build && cd examples && node jobs.js",
+    "example:screenshots": "npm run build && cd examples && node screenshots.js",
+    "example:watch": "npm run build && cd examples && node watch.js"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
