@@ -47,16 +47,6 @@ async function testCrawlFeatures() {
       } as CrawlCreateRequest
     },
     {
-      name: 'JavaScript Enabled Crawl',
-      request: {
-        url: 'https://antoineross.com',
-        max_pages: 3,
-        depth: 1,
-        format: 'markdown',
-        render_js: true
-      } as CrawlCreateRequest
-    },
-    {
       name: 'Pattern-Based Include/Exclude',
       request: {
         url: 'https://antoineross.com',

@@ -10,23 +10,37 @@ export class ScrapeService {
     /**
      * Scrape a single URL
      * @param url
-     * @param format
+     * @param format Output format for scraped content (currently only markdown is supported)
      * @param depth
      * @param maxLinks
-     * @param renderJs
      * @param includeHtml
      * @param fresh
+     * @param proxyMode
+     * @param proxyRegion
+     * @param proxySession
+     * @param rotateUserAgent
+     * @param enableBotProtection
+     * @param maxConsecutiveErrors
+     * @param userAgent
+     * @param waitForSelectors
      * @returns ScrapeResponse Scrape response
      * @throws ApiError
      */
     public getV1Scrape(
         url: string,
-        format?: 'markdown' | 'links',
+        format: 'markdown' = 'markdown',
         depth?: number,
         maxLinks?: number,
-        renderJs?: boolean,
         includeHtml?: boolean,
         fresh?: boolean,
+        proxyMode: 'off' | 'shared_pool' | 'residential' = 'off',
+        proxyRegion?: string,
+        proxySession?: string,
+        rotateUserAgent: boolean = true,
+        enableBotProtection: boolean = true,
+        maxConsecutiveErrors: number = 5,
+        userAgent?: string,
+        waitForSelectors?: Array<string>,
     ): CancelablePromise<ScrapeResponse> {
         return this.httpRequest.request({
             method: 'GET',
@@ -36,9 +50,16 @@ export class ScrapeService {
                 'format': format,
                 'depth': depth,
                 'max_links': maxLinks,
-                'render_js': renderJs,
                 'include_html': includeHtml,
                 'fresh': fresh,
+                'proxy_mode': proxyMode,
+                'proxy_region': proxyRegion,
+                'proxy_session': proxySession,
+                'rotate_user_agent': rotateUserAgent,
+                'enable_bot_protection': enableBotProtection,
+                'max_consecutive_errors': maxConsecutiveErrors,
+                'user_agent': userAgent,
+                'wait_for_selectors': waitForSelectors,
             },
             errors: {
                 400: `Bad request`,

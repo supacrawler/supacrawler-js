@@ -4,7 +4,6 @@ export type DeviceType = 'desktop' | 'mobile'
 export interface ScrapeParams {
   url: string
   format?: ScrapeFormat
-  render_js?: boolean
   wait?: number
   device?: DeviceType
   depth?: number
@@ -43,7 +42,6 @@ export interface JobCreateRequest {
   link_limit?: number
   depth?: number
   include_subdomains?: boolean
-  render_js?: boolean
   patterns?: string[]
 }
 
@@ -64,7 +62,6 @@ export interface JobDataCrawl {
   crawl_data: Record<string, PageData>
   error_data: Record<string, string>
   statistics?: CrawlStatistics
-  render_js?: boolean
 }
 
 export interface ScreenshotMetadata {

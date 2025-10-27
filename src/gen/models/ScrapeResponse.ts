@@ -15,7 +15,13 @@ export type ScrapeResponse = {
      * HTML content (only if include_html=true)
      */
     html?: string;
-    links?: Array<string>;
+    /**
+     * All discovered links on the page (always included)
+     */
+    links: Array<string>;
+    /**
+     * Number of links discovered
+     */
     discovered?: number;
     metadata: ScrapeMetadata;
 };

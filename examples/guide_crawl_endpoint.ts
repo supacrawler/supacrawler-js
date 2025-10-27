@@ -9,7 +9,6 @@ async function main() {
     link_limit: 10,
     depth: 2,
     include_subdomains: false,
-    render_js: false,
   })
 
   console.log('Job created:', job)

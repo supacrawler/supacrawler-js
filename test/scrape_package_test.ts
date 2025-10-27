@@ -32,8 +32,7 @@ async function testScrapeFeatures() {
       params: {
         url: 'https://antoineross.com',
         format: 'markdown' as const,
-        include_html: true,
-        render_js: false
+        include_html: true
       }
     },
     {
@@ -50,7 +49,6 @@ async function testScrapeFeatures() {
       params: {
         url: 'https://antoineross.com',
         format: 'markdown' as const,
-        render_js: true,
         include_html: true
       }
     },

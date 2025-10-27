@@ -9,6 +9,5 @@ export type CrawlJobData = {
     crawl_data?: Record<string, PageContent>;
     error_data?: Record<string, string>;
     statistics?: CrawlStatistics;
-    render_js?: boolean;
 };
 

@@ -36,8 +36,8 @@ const client = new SupacrawlerClient({ apiKey: process.env.SUPACRAWLER_API_KEY! 
 // Scrape (markdown)
 await client.scrape({ url: 'https://example.com', format: 'markdown' })
 
-// Scrape with rendering
-await client.scrape({ url: 'https://spa-example.com', format: 'html', render_js: true, wait: 3000, device: 'desktop' })
+// Scrape with HTML content
+await client.scrape({ url: 'https://example.com', format: 'markdown', include_html: true })
 
 // Map links
 await client.scrape({ url: 'https://example.com', format: 'links', depth: 2, max_links: 100 })

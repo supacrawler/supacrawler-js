@@ -7,10 +7,10 @@ async function main() {
   const basic = await client.scrape({ url: 'https://example.com', format: 'markdown' })
   console.log('Basic scrape:', basic)
 
-  // HTML scrape with JS rendering and wait
+  // HTML scrape with content included
   // Note: Engine scrape does not accept 'wait' or 'device'. Keep to OpenAPI fields only.
-  const html = await client.scrape({ url: 'https://spa-example.com', format: 'markdown', render_js: true, include_html: true })
-  console.log('HTML scrape with JS:', !!(html as any))
+  const html = await client.scrape({ url: 'https://spa-example.com', format: 'markdown', include_html: true })
+  console.log('HTML scrape:', !!(html as any))
 
   // Links mapping with depth and max_links
   const links = await client.scrape({ url: 'https://example.com', format: 'links', depth: 2, max_links: 100 })

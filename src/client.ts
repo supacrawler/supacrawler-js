@@ -90,9 +90,9 @@ export class SupacrawlerClient {
   }
 
   // ------------- Scrape -------------
-  async scrape(params: { url: string; format?: 'markdown' | 'links'; depth?: number; max_links?: number; render_js?: boolean; include_html?: boolean; fresh?: boolean; }): Promise<ScrapeResponse> {
-    const { url, format, depth, max_links, render_js, include_html, fresh } = params
-    return this.engine.scrape.getV1Scrape(url, format, depth, max_links, render_js, include_html, fresh)
+  async scrape(params: { url: string; format?: 'markdown' | 'links'; depth?: number; max_links?: number; include_html?: boolean; fresh?: boolean; }): Promise<ScrapeResponse> {
+    const { url, format, depth, max_links, include_html, fresh } = params
+    return this.engine.scrape.getV1Scrape(url, format, depth, max_links, include_html, fresh)
   }
 
   // ------------- Jobs (crawl + status) -------------

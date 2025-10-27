@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export { SupaCrawlerClient } from './SupaCrawlerClient';
+export { SupacrawlerClient } from './SupacrawlerClient';
 
 export { ApiError } from './core/ApiError';
 export { BaseHttpRequest } from './core/BaseHttpRequest';
@@ -18,6 +18,11 @@ export { CrawlStatusResponse } from './models/CrawlStatusResponse';
 export type { Error } from './models/Error';
 export type { PageContent } from './models/PageContent';
 export type { PageMetadata } from './models/PageMetadata';
+export { ParseCreateRequest } from './models/ParseCreateRequest';
+export type { ParseExamplesResponse } from './models/ParseExamplesResponse';
+export { ParseResponse } from './models/ParseResponse';
+export type { ParseTemplatesResponse } from './models/ParseTemplatesResponse';
+export { ParseValidationResult } from './models/ParseValidationResult';
 export type { ScrapeMetadata } from './models/ScrapeMetadata';
 export type { ScrapeResponse } from './models/ScrapeResponse';
 export { ScreenshotCreateRequest } from './models/ScreenshotCreateRequest';
@@ -27,5 +32,6 @@ export type { ScreenshotMetadata } from './models/ScreenshotMetadata';
 
 export { HealthService } from './services/HealthService';
 export { JobsService } from './services/JobsService';
+export { ParseService } from './services/ParseService';
 export { ScrapeService } from './services/ScrapeService';
 export { ScreenshotsService } from './services/ScreenshotsService';
